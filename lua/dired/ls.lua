@@ -27,19 +27,19 @@ local fs_entry = M.fs_entry
 -- permission string from stat.mode_t
 function M.get_permission_str(mode)
     local filetype = "-"
-    if utils.bitand(mode, fs.fs_masks.S_IFREG) > 0 then
+    if utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFREG then
         filetype = "-"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFDIR) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFDIR then
         filetype = "d"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFLNK) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFLNK then
         filetype = "l"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFCHR) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFCHR then
         filetype = "c"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFBLK) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFBLK then
         filetype = "b"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFIFO) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFIFO then
         filetype = "p"
-    elseif utils.bitand(mode, fs.fs_masks.S_IFSOCK) > 0 then
+    elseif utils.bitand(mode, fs.fs_masks.S_IFMT) == fs.fs_masks.S_IFSOCK then
         filetype = "s"
     end
 
