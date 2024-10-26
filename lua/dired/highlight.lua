@@ -26,6 +26,8 @@ M.BROKEN_LINK_TARGET = "DiredBrokenLinkTarget"
 M.MARKED_FILE = "DiredMarkedFile"
 M.COPY_FILE = "DiredCopyFile"
 M.MOVE_FILE = "DiredMoveFile"
+M.SOCKET_FILE = "DiredSocketFile"
+M.PIPELINE_FILE = "DiredPipelineFile"
 
 local function dec_to_hex(n, chars)
     chars = chars or 6
@@ -324,6 +326,20 @@ M.setup = function()
             clr.DiredMoveFile.bg,
             clr.DiredMoveFile.fg,
             clr.DiredMoveFile.gui
+        )
+        create_highlight_group(
+            M.SOCKET_FILE,
+            clr.DiredSocketFile.link,
+            clr.DiredSocketFile.bg,
+            clr.DiredSocketFile.fg,
+            clr.DiredSocketFile.gui
+        )
+        create_highlight_group(
+            M.PIPELINE_FILE,
+            clr.DiredPipelineFile.link,
+            clr.DiredPipelineFile.bg,
+            clr.DiredPipelineFile.fg,
+            clr.DiredPipelineFile.gui
         )
     end
 end

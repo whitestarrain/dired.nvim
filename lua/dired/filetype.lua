@@ -357,7 +357,7 @@ function M.get_filetype(filename, filetype)
             return "text"
         end
     else
-        return "directory"
+        return filetype
     end
 end
 

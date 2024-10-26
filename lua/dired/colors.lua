@@ -51,6 +51,10 @@ function M.get_filename_color(component)
         return hl.COPY_FILE
     elseif cb.get_action(component.fs_t) == "move" then
         return hl.MOVE_FILE
+    elseif fs_t.stat.type == "socket" then
+        return hl.SOCKET_FILE
+    elseif fs_t.stat.type == "pipeline" then
+        return hl.PIPELINE_FILE
     elseif fs_t.stat.type == "directory" then
         -- if filetype is directory return DIRECTORY_NAME
         return hl.DIRECTORY_NAME
@@ -59,11 +63,8 @@ function M.get_filename_color(component)
         -- return DOTFILE
         return hl.DOTFILE
     elseif fs_t.stat.type == "link" then
-        -- if file is a symlink return appropriate color
-        local target = fs.get_symlink(fs_t.filepath)
-
         -- if target exists return color for link and target
-        if fs.file_exists(target) then
+        if vim.uv.fs_stat(fs_t.filepath) ~= nil then
             return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
         else
             return hl.BROKEN_LINK, hl.BROKEN_LINK_TARGET

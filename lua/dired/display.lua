@@ -55,7 +55,7 @@ function M.get_directory_listing(directory)
     vim.g.dired_dir_count = 0
 
     for i, e in ipairs(dir_files) do
-        if e.filetype == "directory" then
+        if e.stat.type == "directory" then
             vim.g.dired_dir_count = vim.g.dired_dir_count + 1
         else
             vim.g.dired_file_count = vim.g.dired_file_count + 1
