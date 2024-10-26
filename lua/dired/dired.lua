@@ -82,6 +82,11 @@ function M.enter_dir()
     if file.stat.type == "directory" then
         vim.cmd(string.format("keepalt noautocmd edit %s", vim.fn.fnameescape(file.filepath)))
     else
+        if file.stat.type == "link" then
+            vim.cmd(
+                string.format("keepalt edit %s", vim.fn.fnameescape(vim.fn.resolve(file.filepath)))
+            )
+        end
         vim.cmd(string.format("keepalt edit %s", vim.fn.fnameescape(file.filepath)))
     end
 
