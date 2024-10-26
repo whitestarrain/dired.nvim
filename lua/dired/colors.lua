@@ -51,14 +51,14 @@ function M.get_filename_color(component)
         return hl.COPY_FILE
     elseif cb.get_action(component.fs_t) == "move" then
         return hl.MOVE_FILE
-    elseif fs_t.filetype == "directory" then
+    elseif fs_t.stat.type == "directory" then
         -- if filetype is directory return DIRECTORY_NAME
         return hl.DIRECTORY_NAME
     elseif fs.is_hidden(fs_t.filename) then
         -- if file begins with a "." and not a directory then
         -- return DOTFILE
         return hl.DOTFILE
-    elseif fs_t.filetype == "link" then
+    elseif fs_t.stat.type == "link" then
         -- if file is a symlink return appropriate color
         local target = fs.get_symlink(fs_t.filepath)
 
@@ -181,7 +181,7 @@ function M.get_colored_component_str(component)
         end
     end
 
-    if component.fs_t.filetype == "link" then
+    if component.fs_t.stat.type == "link" then
         local linktarget = fs.get_symlink(component.fs_t.filepath)
         table.insert(text_group, nt("->"))
         table.insert(text_group, nt(linktarget, fcolor_s))

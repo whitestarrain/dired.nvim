@@ -51,7 +51,8 @@ local CONFIG_SPEC = {
                 return "Must be string of length 1, instead received " .. type(val)
             end
             if #val ~= 1 then
-                return "Must be string of length 1, instead received string of length " .. tostring(#val)
+                return "Must be string of length 1, instead received string of length "
+                    .. tostring(#val)
             end
         end,
     },
@@ -125,9 +126,9 @@ local CONFIG_SPEC = {
             DiredNormal = { link = { "Normal" }, bg = "NONE", fg = "NONE", gui = "NONE" },
             DiredNormalBold = { link = {}, bg = "NONE", fg = "ffffff", gui = "bold" },
             DiredSymbolicLink = { link = {}, bg = "NONE", fg = "33ccff", gui = "bold" },
-            DiredBrokenLink = { link = {}, bg = "2e2e1f", fg = "ff1a1a", gui = "bold" },
-            DiredSymbolicLinkTarget = { link = {}, bg = "5bd75b", fg = "000000", gui = "bold" },
-            DiredBrokenLinkTarget = { link = {}, bg = "2e2e1f", fg = "ff1a1a", gui = "bold" },
+            DiredBrokenLink = { link = {}, bg = "NONE", fg = "e06c75", gui = "bold" },
+            DiredSymbolicLinkTarget = { link = {}, bg = "NONE", fg = "dcdfe4", gui = "bold" },
+            DiredBrokenLinkTarget = { link = {}, bg = "e06c75", fg = "dcdfe4", gui = "bold" },
             DiredFileExecutable = { link = {}, bg = "NONE", fg = "5bd75b", gui = "bold" },
             DiredMarkedFile = { link = {}, bg = "NONE", fg = "a8b103", gui = "bold" },
             DiredCopyFile = { link = {}, bg = "NONE", fg = "ff8533", gui = "bold" },
