@@ -64,7 +64,7 @@ function M.delete_file(fs_t, ask)
         return
     end
     if ask ~= true then
-        if fs_t.filetype == "directory" then
+        if fs_t.stat.type == "directory" then
             fs.do_delete(fs_t.filepath)
         else
             vim.loop.fs_unlink(fs_t.filepath)
@@ -78,7 +78,7 @@ function M.delete_file(fs_t, ask)
     )
     prompt = string.lower(prompt)
     if string.sub(prompt, 1, 3) == "yes" then
-        if fs_t.filetype == "directory" then
+        if fs_t.stat.type == "directory" then
             fs.do_delete(fs_t.filepath)
         else
             vim.loop.fs_unlink(fs_t.filepath)

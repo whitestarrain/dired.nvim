@@ -79,13 +79,13 @@ function M.enter_dir()
         return
     end
 
-    if file.filetype == "directory" then
+    if file.stat.type == "directory" then
         vim.cmd(string.format("keepalt noautocmd edit %s", vim.fn.fnameescape(file.filepath)))
     else
         vim.cmd(string.format("keepalt edit %s", vim.fn.fnameescape(file.filepath)))
     end
 
-    if file.filetype == "directory" then
+    if file.stat.type == "directory" then
         history.push_path(vim.g.current_dired_path)
         M.init_dired()
     end
