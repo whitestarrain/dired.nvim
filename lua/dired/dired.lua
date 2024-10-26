@@ -38,7 +38,6 @@ function M.init_dired()
     if fs.is_directory(path) ~= true then
         path = fs.get_parent_path(path)
     end
-    vim.api.nvim_set_current_dir(path)
     display.render(path)
 end
 
