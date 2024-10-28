@@ -139,6 +139,7 @@ The default keybinds are given below.
     dired_enter = "<cr>",
     dired_back = "-",
     dired_up = "_",
+    dired_refresh = "r",
     dired_rename = "R",
     dired_create = "d",
     dired_delete = "D",

@@ -10,6 +10,7 @@ M.quit = dired.quit_buf
 M.enter = dired.enter_dir
 M.goback = dired.go_back
 M.goup = dired.go_up
+M.refresh  = dired.refresh
 M.init = dired.init_dired
 M.rename = dired.rename_file
 M.create = dired.create_file
@@ -100,6 +101,7 @@ function M.setup(opts)
     vim.cmd([[command! DiredMarkRange lua require'dired'.mark_range()]])
     vim.cmd([[command! DiredGoBack lua require'dired'.goback()]])
     vim.cmd([[command! DiredGoUp lua require'dired'.goup()]])
+    vim.cmd([[command! DiredRefresh lua require'dired'.refresh()]])
     vim.cmd([[command! DiredCopy lua require'dired'.clip("copy")]])
     vim.cmd([[command! DiredCopyRange lua require'dired'.clip_range("copy")]])
     vim.cmd([[command! DiredCopyMarked lua require'dired'.clip_marked("copy")]])
@@ -121,6 +123,7 @@ function M.setup(opts)
     local opt = { unique = true, silent = true, noremap = true }
     map("", "<Plug>(dired_back)", ":DiredGoBack<cr>", opt)
     map("", "<Plug>(dired_up)", ":DiredGoUp<cr>", opt)
+    map("", "<Plug>(dired_refresh)", ":DiredRefresh<cr>", opt)
     map("", "<Plug>(dired_enter)", ":DiredEnter<cr>", opt)
     map("", "<Plug>(dired_rename)", ":DiredRename<cr>", opt)
     map("", "<Plug>(dired_delete)", ":DiredDelete<cr>", opt)
@@ -158,6 +161,7 @@ function M.setup(opts)
             map(0, "n", config.get("keybinds").dired_enter, "<Plug>(dired_enter)", opt)
             map(0, "n", config.get("keybinds").dired_back, "<Plug>(dired_back)", opt)
             map(0, "n", config.get("keybinds").dired_up, "<Plug>(dired_up)", opt)
+            map(0, "n", config.get("keybinds").dired_refresh, "<Plug>(dired_refresh)", opt)
             map(0, "n", config.get("keybinds").dired_rename, "<Plug>(dired_rename)", opt)
             map(0, "n", config.get("keybinds").dired_create, "<Plug>(dired_create)", opt)
             map(0, "n", config.get("keybinds").dired_delete, "<Plug>(dired_delete)", opt)

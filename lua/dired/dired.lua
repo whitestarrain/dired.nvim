@@ -165,6 +165,15 @@ function M.go_back()
     M.open_dir(fs.get_parent_path(current_path))
 end
 
+function M.refresh()
+    local current_path = vim.g.current_dired_path
+    local filename = display.get_filename_from_listing(vim.api.nvim_get_current_line())
+    if filename ~= nil and filename ~= "" then
+        display.goto_filename = filename
+    end
+    M.open_dir(current_path)
+end
+
 function M.go_up()
     local last_path = history.pop_path()
     M.open_dir(last_path)

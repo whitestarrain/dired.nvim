@@ -92,6 +92,7 @@ local CONFIG_SPEC = {
         default = {
             dired_enter = "<cr>",
             dired_back = "-",
+            dired_refresh = "r",
             dired_up = "_",
             dired_rename = "R",
             dired_create = "d",
