@@ -45,6 +45,8 @@ function M.get_filename_color(component)
     -- a valid link or an broken symlink
     local fs_t = component.fs_t
 
+    -- TODO: char and block file highlight support
+
     if mk.is_marked(component.fs_t) then
         return hl.MARKED_FILE
     elseif cb.get_action(component.fs_t) == "copy" then
@@ -53,7 +55,7 @@ function M.get_filename_color(component)
         return hl.MOVE_FILE
     elseif fs_t.stat.type == "socket" then
         return hl.SOCKET_FILE
-    elseif fs_t.stat.type == "pipeline" then
+    elseif fs_t.stat.type == "fifo" then
         return hl.PIPELINE_FILE
     elseif fs_t.stat.type == "directory" then
         -- if filetype is directory return DIRECTORY_NAME
@@ -64,11 +66,27 @@ function M.get_filename_color(component)
         return hl.DOTFILE
     elseif fs_t.stat.type == "link" then
         -- if target exists return color for link and target
-        if vim.uv.fs_stat(fs_t.filepath) ~= nil then
-            return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
-        else
+        local target_stat = vim.uv.fs_stat(fs_t.filepath)
+        if target_stat == nil then
             return hl.BROKEN_LINK, hl.BROKEN_LINK_TARGET
         end
+        if target_stat.type == "directory" then
+            return hl.SYMBOLIC_LINK, hl.DIRECTORY_NAME
+        end
+        if target_stat.type == "file" then
+            if target_stat.nlink == 0 then
+                return hl.BROKEN_LINK, hl.BROKEN_LINK_TARGET
+            else
+                return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
+            end
+        end
+        if target_stat .type == "socket" then
+            return hl.SYMBOLIC_LINK, hl.SOCKET_FILE
+        end
+        if target_stat .type == "fifo" then
+            return hl.SYMBOLIC_LINK, hl.PIPELINE_FILE
+        end
+        return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
     else
         if
             ut.bitand(fs_t.mode, fs.fs_masks.S_ISUID) > 0
