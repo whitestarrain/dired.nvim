@@ -10,7 +10,7 @@ M.quit = dired.quit_buf
 M.enter = dired.enter_dir
 M.goback = dired.go_back
 M.goup = dired.go_up
-M.refresh  = dired.refresh
+M.refresh = dired.refresh
 M.init = dired.init_dired
 M.rename = dired.rename_file
 M.create = dired.create_file
@@ -152,7 +152,15 @@ function M.setup(opts)
 
     -- set dired keybinds
     -- from https://www.youtube.com/watch?v=ekMIIAqTZ34
-    map = vim.api.nvim_buf_set_keymap
+    map = function(buffer, mode, lhs, rhs, mapping_opts)
+        if type(lhs) == "table" then
+            for _, lhs_item in ipairs(lhs) do
+                vim.api.nvim_buf_set_keymap(buffer, mode, lhs_item, rhs, mapping_opts)
+            end
+        else
+            vim.api.nvim_buf_set_keymap(buffer, mode, lhs, rhs, mapping_opts)
+        end
+    end
     opt = { silent = true, noremap = true }
 
     vim.api.nvim_create_autocmd("FileType", {
