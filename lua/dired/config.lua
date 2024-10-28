@@ -135,6 +135,8 @@ local CONFIG_SPEC = {
             DiredMoveFile = { link = {}, bg = "NONE", fg = "ff3399", gui = "bold" },
             DiredSocketFile = { link = {}, bg = "NONE", fg = "e5c07b", gui = "bold,underline" },
             DiredPipelineFile = { link = {}, bg = "NONE", fg = "56b6c2", gui = "bold,underline" },
+            DiredCharFile = { link = {}, bg = "NONE", fg = "c7c401", gui = "bold" },
+            DiredBlockFile = { link = {}, bg = "NONE", fg = "fffc67", gui = "bold" },
         },
         check = function(cfg)
             for k, v in pairs(cfg) do

@@ -45,8 +45,6 @@ function M.get_filename_color(component)
     -- a valid link or an broken symlink
     local fs_t = component.fs_t
 
-    -- TODO: char and block file highlight support
-
     if mk.is_marked(component.fs_t) then
         return hl.MARKED_FILE
     elseif cb.get_action(component.fs_t) == "copy" then
@@ -64,6 +62,10 @@ function M.get_filename_color(component)
         -- if file begins with a "." and not a directory then
         -- return DOTFILE
         return hl.DOTFILE
+    elseif fs_t.stat.type == "block" then
+        return hl.BLOCK_FILE
+    elseif fs_t.stat.type == "char" then
+        return hl.CHAR_FILE
     elseif fs_t.stat.type == "link" then
         -- if target exists return color for link and target
         local target_stat = vim.uv.fs_stat(fs_t.filepath)
@@ -80,11 +82,17 @@ function M.get_filename_color(component)
                 return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
             end
         end
-        if target_stat .type == "socket" then
+        if target_stat.type == "socket" then
             return hl.SYMBOLIC_LINK, hl.SOCKET_FILE
         end
-        if target_stat .type == "fifo" then
+        if target_stat.type == "fifo" then
             return hl.SYMBOLIC_LINK, hl.PIPELINE_FILE
+        end
+        if fs_t.stat.type == "block" then
+            return hl.SYMBOLIC_LINK, hl.BLOCK_FILE
+        end
+        if fs_t.stat.type == "char" then
+            return hl.SYMBOLIC_LINK, hl.CHAR_FILE
         end
         return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
     else

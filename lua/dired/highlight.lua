@@ -28,6 +28,8 @@ M.COPY_FILE = "DiredCopyFile"
 M.MOVE_FILE = "DiredMoveFile"
 M.SOCKET_FILE = "DiredSocketFile"
 M.PIPELINE_FILE = "DiredPipelineFile"
+M.CHAR_FILE = "DiredCharFile"
+M.BLOCK_FILE = "DiredBlockFile"
 
 local function dec_to_hex(n, chars)
     chars = chars or 6
@@ -340,6 +342,20 @@ M.setup = function()
             clr.DiredPipelineFile.bg,
             clr.DiredPipelineFile.fg,
             clr.DiredPipelineFile.gui
+        )
+        create_highlight_group(
+            M.CHAR_FILE,
+            clr.DiredCharFile.link,
+            clr.DiredCharFile.bg,
+            clr.DiredCharFile.fg,
+            clr.DiredCharFile.gui
+        )
+        create_highlight_group(
+            M.BLOCK_FILE,
+            clr.DiredBlockFile.link,
+            clr.DiredBlockFile.bg,
+            clr.DiredBlockFile.fg,
+            clr.DiredBlockFile.gui
         )
     end
 end
