@@ -148,14 +148,15 @@ function M.quit_buf()
 
     local opts = { sort_lastused = true }
     local buffers = M.buffer_state(opts)
-    if buffers == nil then
-        return
+    if buffers == nil or buffers[1] == nil or buffers[1].flag ~= "#" then
+        if config.get("quit_when_no_buffer") then
+            vim.cmd(":q")
+            return
+        else
+            return
+        end
     end
-    local cur_buf = buffers[1]
-    if cur_buf == nil or cur_buf.flag ~= "#" then
-        return
-    end
-    vim.api.nvim_set_current_buf(cur_buf.bufnr)
+    vim.api.nvim_set_current_buf(buffers[1].bufnr)
 end
 
 function M.go_back()

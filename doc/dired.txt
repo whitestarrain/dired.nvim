@@ -63,6 +63,7 @@ You can require this plugin and use it like this.
         show_banner = false,                 -- Do not show the banner
         hide_details = false,                -- Show file details by default
         sort_order = "name",                 -- Sort files by name by default
+        quit_when_no_buffer = "name",        -- Quit nvim when no buffer
     
         -- Define keybindings for various 'dired' actions
         keybinds = {

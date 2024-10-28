@@ -80,6 +80,14 @@ local CONFIG_SPEC = {
             end
         end,
     },
+    quit_when_no_buffer = {
+        default = false,
+        check = function(val)
+            if type(val) ~= "boolean" then
+                return "Must be boolean, instead received " .. type(val)
+            end
+        end,
+    },
     keybinds = {
         default = {
             dired_enter = "<cr>",
