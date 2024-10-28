@@ -92,14 +92,24 @@ function M.get_directory_listing(directory)
     if #formatted_components > #buffer_listing then
         if #M.cursor_pos == 0 then
             -- when M.cursor_pos is not populated
-            for i, fs_t in ipairs(listing) do
-                if fs_t.component.filename == ".." then
-                    if i < #listing then
-                        M.cursor_pos = { i + 1 + #buffer_listing, cursor_x }
-                    else
+            if M.goto_filename ~= "" then
+                for i, fs_t in ipairs(listing) do
+                    if fs_t.component.filename == M.goto_filename then
                         M.cursor_pos = { i + #buffer_listing, cursor_x }
+                        M.goto_filename = ""
+                        break
                     end
-                    break
+                end
+            else
+                for i, fs_t in ipairs(listing) do
+                    if fs_t.component.filename == ".." then
+                        if i < #listing then
+                            M.cursor_pos = { i + 1 + #buffer_listing, cursor_x }
+                        else
+                            M.cursor_pos = { i + #buffer_listing, cursor_x }
+                        end
+                        break
+                    end
                 end
             end
         else
