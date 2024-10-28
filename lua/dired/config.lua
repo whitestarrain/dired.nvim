@@ -127,7 +127,7 @@ local CONFIG_SPEC = {
             DiredNormalBold = { link = {}, bg = "NONE", fg = "ffffff", gui = "bold" },
             DiredSymbolicLink = { link = {}, bg = "NONE", fg = "33ccff", gui = "bold" },
             DiredBrokenLink = { link = {}, bg = "NONE", fg = "e06c75", gui = "bold" },
-            DiredSymbolicLinkTarget = { link = {}, bg = "NONE", fg = "dcdfe4", gui = "bold" },
+            DiredSymbolicLinkTarget = { link = {}, bg = "NONE", fg = "NONE", gui = "bold" },
             DiredBrokenLinkTarget = { link = {}, bg = "e06c75", fg = "dcdfe4", gui = "bold" },
             DiredFileExecutable = { link = {}, bg = "NONE", fg = "5bd75b", gui = "bold" },
             DiredMarkedFile = { link = {}, bg = "NONE", fg = "a8b103", gui = "bold" },

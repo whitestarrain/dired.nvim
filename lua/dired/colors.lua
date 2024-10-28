@@ -56,12 +56,7 @@ function M.get_filename_color(component)
     elseif fs_t.stat.type == "fifo" then
         return hl.PIPELINE_FILE
     elseif fs_t.stat.type == "directory" then
-        -- if filetype is directory return DIRECTORY_NAME
         return hl.DIRECTORY_NAME
-    elseif fs.is_hidden(fs_t.filename) then
-        -- if file begins with a "." and not a directory then
-        -- return DOTFILE
-        return hl.DOTFILE
     elseif fs_t.stat.type == "block" then
         return hl.BLOCK_FILE
     elseif fs_t.stat.type == "char" then
@@ -96,6 +91,7 @@ function M.get_filename_color(component)
         end
         return hl.SYMBOLIC_LINK, hl.SYMBOLIC_LINK_TARGET
     else
+        -- type is file
         if
             ut.bitand(fs_t.mode, fs.fs_masks.S_ISUID) > 0
             and ut.bitand(fs_t.mode, fs.fs_masks.S_ISGID) > 0
